@@ -1,52 +1,52 @@
-// antoine
+//Antoine
 #include <stdio.h>
 
+#define TAILLE 8
+
 int main() {
-    int a[8];
+    FILE *fichier = fopen("Valeurs.txt", "r");
+    if (fichier == NULL) {
+        printf("Erreur : impossible d'ouvrir le fichier.\n");
+        return 1;
+    }
+
+    int valeurs[TAILLE];
     int i = 0;
 
-    // Lire les 8 chiffres
-    printf("Entrez 8 chiffres :\n");
-    while (i < 8) {
-        scanf("%d", &a[i]);
+    // Lire les valeurs tant qu'on peut et qu'on n'a pas atteint la limite
+    while (fscanf(fichier, "%d", &valeurs[i]) == 1) {
         i++;
+        if (i > TAILLE) break; // Plus que 8 ? On sort !
     }
 
-    // Trouver le plus grand
-    int max1 = a[0], i1 = 0;
-    i = 1;
-    while (i < 8) {
-        if (a[i] > max1) {
-            max1 = a[i];
-            i1 = i;
+    fclose(fichier);
+
+    // Vérifie qu'on a exactement 8 valeurs
+    if (i != TAILLE) {
+        printf("Erreur : nombre de valeurs incorrect (il faut exactement %d valeurs).\n", TAILLE);
+        return 1;
+    }
+
+    // Trouver les deux plus grandes valeurs
+    int max1 = valeurs[0], max2 = valeurs[0], i1 = 0, i2 = 0;
+
+    for (i = 1; i < TAILLE; i++) {
+        if (valeurs[i] > max1) {
+            max2 = max1; i2 = i1;
+            max1 = valeurs[i]; i1 = i;
+        } else if (valeurs[i] > max2 || i1 == i2) {
+            max2 = valeurs[i]; i2 = i;
         }
-        i++;
     }
 
-    // Marquer le plus grand
-    a[i1] = -1;
-
-    // Trouver le deuxième plus grand
-    int max2 = -1, i2 = -1;
-    i = 0;
-    while (i < 8) {
-        if (a[i] > max2) {
-            max2 = a[i];
-            i2 = i;
+    // Afficher les valeurs sauf les deux plus grandes
+    printf("Valeurs sans les deux plus grandes (%d et %d) :\n", max1, max2);
+    for (i = 0; i < TAILLE; i++) {
+        if (i != i1 && i != i2) {
+            printf("%d ", valeurs[i]);
         }
-        i++;
     }
 
-    // Marquer le deuxième plus grand
-    a[i2] = -1;
-
-    // Afficher les chiffres restants
-    i = 0;
-    while (i < 8) {
-        if (a[i] != -1)
-            printf("%d ", a[i]);
-        i++;
-    }
-
+    printf("\n");
     return 0;
 }
