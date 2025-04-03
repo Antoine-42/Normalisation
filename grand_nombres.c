@@ -14,7 +14,7 @@ int main() {
     int i = 0;
 
     // Lire les valeurs tant qu'on peut et qu'on n'a pas atteint la limite
-    while (fscanf(fichier, "%d", &valeurs[i]) == 1) {
+    while (fscanf(fichier, "%d,", &valeurs[i]) == 1) {
         i++;
         if (i > TAILLE) break; // Plus que 8 ? On sort !
     }
