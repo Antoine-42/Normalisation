@@ -1,4 +1,4 @@
-//yanis antoine lenny
+//yanis et antoine
 #include <stdio.h>
 #include "evale_srv_moyenne.h"
 
