@@ -1,8 +1,9 @@
-//yanis et antoine
+//Tout le monde
 #include <stdio.h>
 #include "evale_srv_moyenne.h"
+#include "connexion.h"
 
-int main() {
+float analyse() {
     int valeurs[TAILLE];
     float resultat[RESTE];
  
@@ -19,5 +20,5 @@ int main() {
     float moyenne = calculerMoyenne(resultat);
     printf("Moyenne : %.2f\n", moyenne);
  
-    return 0;
+    return moyenne;
 }
