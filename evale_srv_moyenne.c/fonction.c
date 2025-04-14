@@ -4,7 +4,7 @@
  
 // Lire les 8 valeurs depuis le fichier
 int lireValeurs(int tab[]) {
-    FILE *f = fopen("Valeurs.txt", "r");
+    FILE *f = fopen("fichier_client.txt", "r");
     if (!f) return 0;
  
     int i = 0;
